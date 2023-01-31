@@ -1,0 +1,20 @@
+---
+- hosts: all
+  gather_facts: false
+  remote_user: azureuser
+  become: yes
+  become_method: sudo
+  tasks:
+    - name: Ensure group "somegroup" exists
+      group:
+       name: admin
+       state: present
+ 
+    - name: Add the user 'johnd' with a specific uid and a primary group of 'admin'
+      user:
+       name: johnd
+       comment: John Doe
+       uid: 1040
+       group: admin
+       update_password: on_create
+
